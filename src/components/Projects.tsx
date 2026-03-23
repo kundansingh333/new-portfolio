@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { Tilt } from "react-tilt";
 
@@ -20,7 +19,7 @@ interface Project {
   live: string;
   period: string;
   gradient: string;
-  image: string;
+  images: string[];
 }
 
 const projects: Project[] = [
@@ -43,7 +42,13 @@ const projects: Project[] = [
     live: "https://www.unilancer.online",
     period: "Aug 2025 – Dec 2025",
     gradient: "from-violet-500/20 to-fuchsia-500/20",
-    image: "/projects/unilancer.png",
+    images: [
+      "/projects/unilancer-1.png",
+      "/projects/unilancer-2.png",
+      "/projects/unilancer-3.png",
+      "/projects/unilancer-4.png",
+      "/projects/unilancer-5.png",
+    ],
   },
   {
     title: "Wanderlust",
@@ -65,7 +70,13 @@ const projects: Project[] = [
     live: "https://wanderlust-1.onrender.com",
     period: "Jul 2023 – Jan 2024",
     gradient: "from-cyan-500/20 to-blue-500/20",
-    image: "/projects/wanderlust.png",
+    images: [
+      "/projects/wanderlust-1.png",
+      "/projects/wanderlust-2.png",
+      "/projects/wanderlust-3.png",
+      "/projects/wanderlust-4.png",
+      "/projects/wanderlust-5.png",
+    ],
   },
   {
     title: "Back2U",
@@ -85,7 +96,13 @@ const projects: Project[] = [
     live: "http://back2u.great-site.net/",
     period: "Jul 2023 – Jan 2024",
     gradient: "from-emerald-500/20 to-teal-500/20",
-    image: "/projects/back2u.png",
+    images: [
+      "/projects/back2u-1.png",
+      "/projects/back2u-2.png",
+      "/projects/back2u-3.png",
+      "/projects/back2u-4.png",
+      "/projects/back2u-5.png",
+    ],
   },
 
   {
@@ -105,13 +122,23 @@ const projects: Project[] = [
     live: "https://makecook.netlify.app/",
     period: "March 2025 – April 2025",
     gradient: "from-emerald-500/20 to-teal-500/20",
-    image: "/projects/makecook.png",
+    images: [
+      "/projects/makecook-1.png",
+      "/projects/makecook-2.png",
+      "/projects/makecook-3.png",
+      "/projects/makecook-4.png",
+      "/projects/makecook-5.png",
+    ],
   },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+  const imageCount = project.images.length;
+  // Each image takes 100% width, strip is imageCount * 100% wide
+  // On hover, translate from 0 to -(imageCount - 1) * 100%
+  const stripWidth = `${imageCount * 100}%`;
 
   return (
     <motion.div
@@ -142,19 +169,43 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         />
 
         <div className="relative w-full h-[230px] z-10 rounded-2xl overflow-hidden bg-white/[0.02]">
-          <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`} />
-          <Image
-            src={project.image}
-            alt="project_image"
-            fill
-            className="w-full h-full object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
-          />
+          <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 z-10 pointer-events-none`} />
+          
+          {/* Scrolling image strip — plays stepped animation on hover */}
+          <div
+            className="project-scroll-strip absolute top-0 left-0 h-full flex"
+            style={{
+              width: stripWidth,
+              "--img-count": imageCount,
+            } as React.CSSProperties}
+          >
+            {project.images.map((img, i) => (
+              <div
+                key={i}
+                className="relative h-full overflow-hidden"
+                style={{ width: `${100 / imageCount}%` }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`https://picsum.photos/seed/${project.title.toLowerCase()}${i}/600/350`}
+                  alt={`${project.title} screenshot ${i + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
 
-          <div className="absolute inset-0 flex justify-end m-3 gap-2">
+          {/* Image counter indicator */}
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {project.images.map((_, i) => (
+              <div
+                key={i}
+                className="w-1.5 h-1.5 rounded-full bg-white/40"
+              />
+            ))}
+          </div>
+
+          <div className="absolute inset-0 flex justify-end m-3 gap-2 z-20">
             <div
               onClick={() => window.open(project.github !== "#" ? project.github : undefined, "_blank")}
               className="bg-black/60 backdrop-blur-md border border-white/20 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer hover:bg-black/80 hover:scale-110 transition-all z-30"

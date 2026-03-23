@@ -45,7 +45,7 @@ export default function Navbar() {
                 href="#"
                 className="font-heading text-lg font-bold tracking-tight text-white hover:text-accent transition-colors duration-300"
               >
-                KKS
+                Portfolio
                 <span className="text-accent">.</span>
               </a>
 
@@ -64,11 +64,11 @@ export default function Navbar() {
 
               {/* Right side */}
               <div className="flex items-center gap-3">
-                {/* Download CV */}
+              {/* Download CV */}
                 <motion.a
                   href="/Kundan_Kumar_Singh_CV.pdf"
                   download
-                  className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-body font-medium text-white bg-gradient-to-r from-accent to-accent-secondary rounded-full hover:opacity-90 transition-opacity duration-300"
+                  className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-body font-medium text-white/80 bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-full hover:bg-white/[0.1] hover:text-white hover:border-white/[0.15] transition-all duration-300"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -77,7 +77,6 @@ export default function Navbar() {
                   </svg>
                   CV
                 </motion.a>
-
 
                 {/* Mobile menu toggle */}
                 <button
@@ -130,7 +129,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ delay: navLinks.length * 0.05 }}
-              className="mt-4 flex items-center gap-2 px-6 py-3 text-base font-body font-medium text-white bg-gradient-to-r from-accent to-accent-secondary rounded-full"
+              className="mt-4 flex items-center gap-2 px-6 py-3 text-base font-body font-medium text-white/80 bg-white/[0.03] backdrop-blur-md border border-white/[0.08] hover:bg-white/[0.1] hover:text-white transition-all duration-300 rounded-full"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />

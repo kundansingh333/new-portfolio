@@ -113,7 +113,7 @@ export default function ScrollyCanvas({
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0a0f]">
           <div className="mb-8">
             <span className="font-heading text-2xl font-bold text-white tracking-tight">
-              KKS<span className="text-accent">.</span>
+              Portfolio<span className="text-accent">.</span>
             </span>
           </div>
           <div className="relative w-56 h-[2px] bg-white/10 rounded-full overflow-hidden mb-4">

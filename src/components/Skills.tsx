@@ -81,16 +81,50 @@ function SkillCard({
           </div>
 
           {/* Skills */}
-          <div className="flex flex-wrap gap-2">
-            {category.skills.map((skill) => (
-              <motion.span
-                key={skill}
-                className="px-2.5 py-1 text-xs font-body text-white/50 bg-white/[0.04] border border-white/[0.06] rounded-md transition-all duration-300 hover:text-white/80 hover:border-white/[0.15] hover:bg-white/[0.08] cursor-default"
-                whileHover={{ scale: 1.05 }}
-              >
-                {skill}
-              </motion.span>
-            ))}
+          <div className="flex flex-wrap gap-2.5">
+            {category.skills.map((skill, i) => {
+              // Determine base colors depending on the category title
+              let colorClass = "from-white/10 to-white/5 text-white/70";
+              let hoverBorder = "hover:border-white/30";
+              let hoverShadow = "hover:shadow-[0_0_15px_rgba(255,255,255,0.2)]";
+
+              if (category.title === "Languages") {
+                colorClass = "from-violet-500/10 to-fuchsia-500/10 text-fuchsia-100/80 border-fuchsia-500/20";
+                hoverBorder = "hover:border-fuchsia-400/50";
+                hoverShadow = "hover:shadow-[0_0_15px_rgba(217,70,239,0.3)]";
+              } else if (category.title === "Frameworks") {
+                colorClass = "from-cyan-500/10 to-blue-500/10 text-cyan-100/80 border-cyan-500/20";
+                hoverBorder = "hover:border-cyan-400/50";
+                hoverShadow = "hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]";
+              } else if (category.title === "Tools & Platforms") {
+                colorClass = "from-emerald-500/10 to-teal-500/10 text-emerald-100/80 border-emerald-500/20";
+                hoverBorder = "hover:border-emerald-400/50";
+                hoverShadow = "hover:shadow-[0_0_15px_rgba(52,211,153,0.3)]";
+              }
+
+              return (
+                <motion.div
+                  key={skill}
+                  className={`px-3 py-1.5 text-[13px] font-body font-medium bg-gradient-to-r ${colorClass} border backdrop-blur-sm rounded-lg cursor-default transition-all duration-300 ${hoverBorder} ${hoverShadow} hover:text-white`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{
+                    duration: 0.4,
+                    delay: index * 0.1 + i * 0.05,
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20
+                  }}
+                  whileHover={{ 
+                    scale: 1.08, 
+                    y: -2,
+                    transition: { type: "spring", stiffness: 400, damping: 10 } 
+                  }}
+                >
+                  {skill}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </Tilt>
