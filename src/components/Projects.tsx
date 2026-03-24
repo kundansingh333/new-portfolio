@@ -43,11 +43,11 @@ const projects: Project[] = [
     period: "Aug 2025 – Dec 2025",
     gradient: "from-violet-500/20 to-fuchsia-500/20",
     images: [
-      "/projects/unilancer-1.png",
-      "/projects/unilancer-2.png",
-      "/projects/unilancer-3.png",
-      "/projects/unilancer-4.png",
-      "/projects/unilancer-5.png",
+      "/images/unilancer1.png",
+      "/images/unilancer2.png",
+      "/images/unilancer3.png",
+      "/images/unilancer4.png",
+      "/images/unilancer5.png",
     ],
   },
   {
@@ -71,11 +71,9 @@ const projects: Project[] = [
     period: "Jul 2023 – Jan 2024",
     gradient: "from-cyan-500/20 to-blue-500/20",
     images: [
-      "/projects/wanderlust-1.png",
-      "/projects/wanderlust-2.png",
-      "/projects/wanderlust-3.png",
-      "/projects/wanderlust-4.png",
-      "/projects/wanderlust-5.png",
+      "/images/wanderlust1.png",
+      "/images/wanderlust2.avif",
+      "/images/wanderlust3.jpg",
     ],
   },
   {
@@ -97,11 +95,11 @@ const projects: Project[] = [
     period: "Jul 2023 – Jan 2024",
     gradient: "from-emerald-500/20 to-teal-500/20",
     images: [
-      "/projects/back2u-1.png",
-      "/projects/back2u-2.png",
-      "/projects/back2u-3.png",
-      "/projects/back2u-4.png",
-      "/projects/back2u-5.png",
+      "/images/back2u1.png",
+      "/images/back2u2.png",
+      "/images/back2u3.png",
+      "/images/back2u4.png",
+      "/images/back2u5.png",
     ],
   },
 
@@ -123,11 +121,11 @@ const projects: Project[] = [
     period: "March 2025 – April 2025",
     gradient: "from-emerald-500/20 to-teal-500/20",
     images: [
-      "/projects/makecook-1.png",
-      "/projects/makecook-2.png",
-      "/projects/makecook-3.png",
-      "/projects/makecook-4.png",
-      "/projects/makecook-5.png",
+      "/images/makecook1.png",
+      "/images/makecook2.png",
+      "/images/makecook3.png",
+      "/images/makecook4.png",
+      "/images/makecook5.png",
     ],
   },
 ];
@@ -187,7 +185,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={`https://picsum.photos/seed/${project.title.toLowerCase()}${i}/600/350`}
+                  src={img}
                   alt={`${project.title} screenshot ${i + 1}`}
                   className="w-full h-full object-cover"
                 />
